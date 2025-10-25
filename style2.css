@@ -1,0 +1,181 @@
+.navbar {
+  background: linear-gradient(to left, #fff 0%, #ff8c00 40%, #ff4500 100%);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border : 3px solid #fff;
+    border-radius: 50%;
+    background: #ff4500;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.profile i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.profile:hover {
+  background: #ff8c00;
+  cursor: pointer;
+}
+
+.more{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.more i {
+  font-size: 30px;
+  color: #ff4500;
+}
+
+h2{
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.banner {
+  color: #333;
+  text-align: center;
+  padding: 60px 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+.search-input {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 2px solid #ff4500;
+    font-size: 16px;
+    width: 80%;
+    max-width: 400px;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+.search-input:hover{
+  border: 2px solid #ff8c00;
+  cursor: pointer;
+}
+
+/* Add this to style2.css for the search button styling */
+.banner button {
+  padding: 10px 15px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff7043;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.banner button:hover {
+  background-color: #ff5722;
+}
+
+footer{
+  margin-top: 300px;
+}
+
+.footer-content{
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px 0;
+}
+
+.footer-links li a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+}
+
+.footer-panel{
+  background-color: black;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-content ul li {
+    margin-bottom: 8px;
+}
+
+.footer-content ul li a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Recipe grid styling */
+#recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px;
+}
+
+.recipe {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  background: #f9f9f9;
+  transition: 0.3s;
+}
+
+.recipe:hover {
+  transform: scale(1.05);
+}
+
+.recipe img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.recipe h3 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.recipe a {
+  text-decoration: none;
+  color: #007BFF;
+  font-size: 14px;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Chef</title>
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style2.css"/>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="profile">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h2>Search Recipe</h2> 
+            <div class="more">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+        <div class="banner">
+            <h1>Cook Smarter, Eat Better</h1>
+            <input class="search-input" type="text" id="queryInput" placeholder="Search for a recipe..." />
+            <button onclick="searchRecipes()">Search</button>
+        </div>
+    </header>
+
+    <div id="recipes"></div>
+
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="#">Contact us</a></li> 
+                <li><a href="#">Email</a></li>
+            </ul>
+            <ul class="footer-links">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </div>
+        <div class="footer-panel">
+            <p>&copy; 2024 Smart Chef. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    const API_KEY = "a28e7fb9b7da4a5682e451d12517c1dd";
+
+    async function searchRecipes() {
+      const query = document.getElementById("queryInput").value.trim();
+      if (!query) {
+        alert("Please enter a recipe name.");
+        return;
+      }
+
+      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${encodeURIComponent(query)}&number=15&addRecipeInformation=true`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const recipesDiv = document.getElementById("recipes");
+        recipesDiv.innerHTML = "";
+
+        if (!data.results || data.results.length === 0) {
+          recipesDiv.innerHTML = "<p>No recipes found.</p>";
+          return;
+        }
+
+        data.results.forEach(recipe => {
+          const div = document.createElement("div");
+          div.className = "recipe";
+          div.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <h3>${recipe.title}</h3>
+            <a href="${recipe.sourceUrl}" target="_blank">View Recipe</a>
+          `;
+          recipesDiv.appendChild(div);
+        });
+      } catch (err) {
+        console.error(err);
+        alert("Failed to fetch recipes.");
+      }
+    }
+    </script>
+</body>
+</html>

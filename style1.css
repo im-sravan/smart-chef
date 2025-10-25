@@ -1,0 +1,269 @@
+header{
+    background: linear-gradient(to bottom, #ff4500 0%, #ff8c00 60%, #fff 100%);
+}
+
+.navbar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    border : 3px solid #fff;
+    border-radius: 50%;
+    background: #ff4500;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.profile i {
+  font-size: 30px;
+  color: #fff;
+}
+
+.profile:hover {
+  background: #ff8c00;
+  cursor: pointer;
+}
+
+.more{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 55px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.more i {
+  font-size: 30px;
+  color: #fff;
+}
+
+h2{
+    margin: 0;
+    font-size: 30px;
+    font-family: 'pacifico', cursive;
+    font-weight: normal;
+}
+
+.banner {
+  color: white;
+  text-align: center;
+  padding: 60px 10px;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 2px;
+}
+
+.cards{
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 50px;
+ margin-top: 20px;
+}
+
+.icon-card {
+  width: 140px;
+  height: 140px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+  text-decoration: none;
+}
+
+.icon-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  background: #ff4500;
+  color: #fff;
+}
+
+.card-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.icon-card i {
+  font-size: 40px;
+  color: #ff4500; 
+  margin-bottom: 8px;
+}
+
+.icon-card:hover i {
+  color: #fff;
+}
+
+.add-card {
+  width: 140px;
+  height: 140px;
+  border: 2px solid #333;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fff;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  text-decoration: none;
+}
+
+.add-card i {
+  font-size: 40px;
+  color: #ff4500; 
+  margin-bottom: 8px;
+}
+
+.add-card p {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.add-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  background: #ff4500;
+  color: #fff;
+}
+
+.add-card:hover i {
+  color: #fff;
+}
+
+
+.top-search-header{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.top-search-header i{
+  color: #ff4500;
+  margin-right: 10px;
+}
+
+
+.items{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  justify-items: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.item-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 25%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+  border: 3px solid #ff4500;
+}
+
+.item p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.item-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.back{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  background-color:black ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 50px;
+}
+
+.footer-content{
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px 0;
+}
+
+.footer-links li a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 16px;
+}
+
+.footer-panel{
+  background-color: black;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-content ul li {
+    margin-bottom: 8px;
+}
+
+.footer-content ul li a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: inherit;
+}

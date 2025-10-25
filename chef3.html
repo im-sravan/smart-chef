@@ -1,0 +1,178 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Chef</title>
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style3.css"/>
+
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="profile">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <h2>Add Ingredents</h2> 
+      <div class="more">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <div class="banner">
+      <h2>Find recipes that suit your taste</h2>
+    </div>
+  </header>
+
+  <!-- 🔍 Search Section -->
+  <div class="search-section">
+    <i class="fa-solid fa-camera" onclick="toggleCamera()" title="Open Camera"></i>
+    <input type="text" id="queryInput" placeholder="Enter the Ingredents (e.g. potato)">
+    <i class="fa-solid fa-microphone" title="Voice Input (coming soon)"></i>
+    <button onclick="searchRecipes()">Search</button>
+  </div>
+
+  <!-- 📌 Recipes Rendered Here -->
+  <div id="recipes"></div>
+
+
+  <div class="back">
+        <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <i class="fa-solid fa-arrow-up"></i> Back to Top
+        </button>
+</div>
+<!-- 📷 Fullscreen Camera Overlay -->
+  <div id="cameraOverlay">
+    <video id="fullCamera" autoplay playsinline></video>
+    <canvas id="fullCanvas" width="640" height="480" style="display:none;"></canvas>
+    <img id="fullPhoto" alt="Captured Image" style="display:none;" />
+    <div id="fullControls">
+      <button class="confirm" onclick="acceptFullImage()">✅ Accept</button>
+      <button class="retake" onclick="retakeFullImage()">❌ Ignore</button>
+    </div>
+    <button id="fullCaptureBtn" onclick="captureFullImage()">📸 Capture</button>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <ul class="footer-links">
+        <li><a href="#">Contact us</a></li> 
+        <li><a href="#">Email</a></li>
+        </ul>
+        <ul class="footer-links">
+        <li><a href="#">Help</a></li>
+        <li><a href="#">Feedback</a></li>
+      </ul>
+    </div>
+    <div class="footer-panel">
+      <p>&copy; 2024 Smart Chef. All rights reserved.</p>
+    </div>
+  </footer>
+
+  
+
+  <script>
+    const API_KEY = "a28e7fb9b7da4a5682e451d12517c1dd";
+
+    async function searchRecipes() {
+      const query = document.getElementById("queryInput").value.trim();
+      if (!query) {
+        alert("Please enter a recipe name.");
+        return;
+      }
+
+      const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${encodeURIComponent(query)}&number=15&addRecipeInformation=true`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const recipesDiv = document.getElementById("recipes");
+        recipesDiv.innerHTML = "";
+
+        if (!data.results || data.results.length === 0) {
+          recipesDiv.innerHTML = "<p>No recipes found.</p>";
+          return;
+        }
+
+        data.results.forEach(recipe => {
+          const div = document.createElement("div");
+          div.className = "recipe";
+          div.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <h3>${recipe.title}</h3>
+            <a href="${recipe.sourceUrl}" target="_blank">View Recipe</a>
+          `;
+          recipesDiv.appendChild(div);
+        });
+      } catch (err) {
+        console.error(err);
+        alert("Failed to fetch recipes.");
+      }
+    }
+
+     let fullStream;
+
+  function toggleCamera() {
+    const overlay = document.getElementById('cameraOverlay');
+    overlay.style.display = 'flex';
+    startFullCamera();
+  }
+
+  async function startFullCamera() {
+    try {
+      fullStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const video = document.getElementById('fullCamera');
+      video.srcObject = fullStream;
+      video.style.display = 'block';
+      document.getElementById('fullPhoto').style.display = 'none';
+      document.getElementById('fullControls').style.display = 'none';
+      document.getElementById('fullCaptureBtn').style.display = 'inline-block';
+    } catch (error) {
+      console.error("Camera access error:", error);
+      alert("Unable to access camera.");
+    }
+  }
+
+  function captureFullImage() {
+    const canvas = document.getElementById('fullCanvas');
+    const video = document.getElementById('fullCamera');
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL('image/png');
+    document.getElementById('fullPhoto').src = imageData;
+
+    fullStream.getTracks().forEach(track => track.enabled = false);
+
+    video.style.display = 'none';
+    document.getElementById('fullPhoto').style.display = 'block';
+    document.getElementById('fullControls').style.display = 'block';
+    document.getElementById('fullCaptureBtn').style.display = 'none';
+  }
+
+  function acceptFullImage() {
+    document.getElementById('queryInput').value = "Captured Ingredient"; // Placeholder
+    document.getElementById('cameraOverlay').style.display = 'none';
+    stopFullCamera();
+    searchRecipes();
+  }
+
+  function retakeFullImage() {
+    fullStream.getTracks().forEach(track => track.enabled = true);
+    document.getElementById('fullCamera').style.display = 'block';
+    document.getElementById('fullPhoto').style.display = 'none';
+    document.getElementById('fullControls').style.display = 'none';
+    document.getElementById('fullCaptureBtn').style.display = 'inline-block';
+  }
+
+  function stopFullCamera() {
+    if (fullStream) {
+      fullStream.getTracks().forEach(track => track.stop());
+      fullStream = null;
+    }
+  }
+  </script>
+</body>
+</html>
